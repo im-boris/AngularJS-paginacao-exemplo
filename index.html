@@ -1,0 +1,42 @@
+<html ng-app="paginacao-ex.app">
+  <head>
+    <title>Angular JS - Paginação - Teste</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body style="background-color: gray; color: white" ng-controller="paginacao-ex.controller as vm">
+    <input type="text" ng-model="filtro">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th>Empresa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="dado in vm.dados|filter:filtro||vm.paginacao ">
+            <td>{{dado.id}}</td>
+            <td>{{dado.nome}}</td>
+            <td>{{dado.email}}</td>
+            <td>{{dado.telefone}}</td>
+            <td>{{dado.empresa}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div ng-if="!filtro">
+        <button type="button" aria-label="Primeira Página" data-ng-click="vm.navigateFirstPage()" data-ng-disabled="vm.currentPage === 1">Primeira</button>
+        <button type="button" aria-label="Página Anterior" data-ng-click="vm.navigatePreviousPage()" data-ng-disabled="vm.currentPage === 1">Antes</button>
+        Página
+        <label name="numeroPagina" data-ng-model="vm.currentPage">{{vm.currentPage}}</label>
+        de
+        <label name="totalPaginas">{{vm.totalPages}}</label>
+        <button type="button" aria-label="Próxima Página" data-ng-click="vm.navigateNextPage()" data-ng-disabled="vm.currentPage === vm.totalPages">Depois</button>
+        <button type="button" aria-label="Última Página" data-ng-click="vm.navigateLastPage()" data-ng-disabled="vm.currentPage === vm.totalPages">Última</button>
+    </div>
+  </body>
+</html>
